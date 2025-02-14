@@ -1,0 +1,174 @@
+
+SQL*Plus: Release 19.0.0.0.0 - Production on Fri Feb 14 23:32:29 2025
+Version 19.3.0.0.0
+
+Copyright (c) 1982, 2019, Oracle.  All rights reserved.
+
+Enter user-name: c##batch7am
+Enter password:
+Last Successful login time: Fri Feb 14 2025 20:39:33 +05:30
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.3.0.0.0
+
+SQL> select * from payments;
+
+CUSTOMER_ID     AMOUNT MODES              PAYMENT_D
+----------- ---------- ------------------ ---------
+          1         60 Cash               24-SEP-20
+          2         30 Cradit Card        27-APR-20
+          3         90 Credit Card        07-JUL-20
+          4         50 Debit Card         12-FEB-20
+          5         40 Mobile Payment     20-NOV-20
+          6         40 Debit Card         28-JUN-20
+          7         10 Cash               25-AUG-21
+
+7 rows selected.
+
+SQL> select modes,sum(amount) from payments group by modes;
+
+MODES              SUM(AMOUNT)
+------------------ -----------
+Debit Card                  90
+Cash                        70
+Mobile Payment              40
+Credit Card                 90
+Cradit Card                 30
+
+SQL> select modes,sum(amount) as total_amount from payments group by modes order by total_amount asc;
+
+MODES              TOTAL_AMOUNT
+------------------ ------------
+Cradit Card                  30
+Mobile Payment               40
+Cash                         70
+Debit Card                   90
+Credit Card                  90
+
+SQL> select modes,sum(amount) as total_amount from payments group by modes order by total_amount desc;
+
+MODES              TOTAL_AMOUNT
+------------------ ------------
+Debit Card                   90
+Credit Card                  90
+Cash                         70
+Mobile Payment               40
+Cradit Card                  30
+
+SQL> select modes,count(amount) as total from payments group by modes order by total having count(amount)>=70;
+select modes,count(amount) as total from payments group by modes order by total having count(amount)>=70
+                                                                                *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select modes,count(amount) as total from payments group by modes having count(amount)>=70;
+
+no rows selected
+
+SQL> select modes,count(amount) as total from payments group by modes having count(amount)>=2;
+
+MODES                   TOTAL
+------------------ ----------
+Debit Card                  2
+Cash                        2
+
+SQL> select modes,count(amount) as total from payments group by modes having count(amount)>=2 order by total desc;
+
+MODES                   TOTAL
+------------------ ----------
+Cash                        2
+Debit Card                  2
+
+SQL> select modes,count(amount) as total from payments group by modes having count(amount)>=2 order by total asc;
+
+MODES                   TOTAL
+------------------ ----------
+Cash                        2
+Debit Card                  2
+
+SQL> select * from tab1;
+
+no rows selected
+
+SQL> desc tab1;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SNO                                       NOT NULL NUMBER(3)
+ SNAME                                              VARCHAR2(15)
+ MARKS                                              NUMBER
+ STATE                                              VARCHAR2(10)
+
+SQL> commit;
+
+Commit complete.
+
+SQL> drop table tab1 purge;
+
+Table dropped.
+
+SQL> create table tab1(
+  2  name varchar2(18),
+  3  class number(2),
+  4  rollNo number(5),
+  5  subject number(3)
+  6  );
+
+Table created.
+
+SQL> insert into tab1 values(&name,&class,&rollNo,&subject);
+Enter value for name: 'sabaz'
+Enter value for class: 5
+Enter value for rollno: 1
+Enter value for subject: 3
+old   1: insert into tab1 values(&name,&class,&rollNo,&subject)
+new   1: insert into tab1 values('sabaz',5,1,3)
+
+1 row created.
+
+SQL> select * from tab1;
+
+NAME                    CLASS     ROLLNO    SUBJECT
+------------------ ---------- ---------- ----------
+sabaz                       5          1          3
+
+SQL> insert into tab1(rollNo,subject) values(&rollNo,&subject);
+Enter value for rollno: 2
+Enter value for subject: 7
+old   1: insert into tab1(rollNo,subject) values(&rollNo,&subject)
+new   1: insert into tab1(rollNo,subject) values(2,7)
+
+1 row created.
+
+SQL> select * from tab1;
+
+NAME                    CLASS     ROLLNO    SUBJECT
+------------------ ---------- ---------- ----------
+sabaz                       5          1          3
+                                       2          7
+
+SQL> insert into tab1('mohan',5,3,5);
+insert into tab1('mohan',5,3,5)
+                 *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword
+
+
+SQL> insert into tab1 values('mohan',5,3,5);
+
+1 row created.
+
+SQL> select * from tab1;
+
+NAME                    CLASS     ROLLNO    SUBJECT
+------------------ ---------- ---------- ----------
+sabaz                       5          1          3
+                                       2          7
+mohan                       5          3          5
+
+SQL> commit;
+
+Commit complete.
+
+SQL>
