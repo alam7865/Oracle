@@ -1,0 +1,365 @@
+
+SQL*Plus: Release 19.0.0.0.0 - Production on Sat Mar 8 18:50:42 2025
+Version 19.3.0.0.0
+
+Copyright (c) 1982, 2019, Oracle.  All rights reserved.
+
+Enter user-name: c##batch7am
+Enter password:
+Last Successful login time: Sat Mar 08 2025 11:19:54 +05:30
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.3.0.0.0
+
+SQL> setpagesize 100
+SP2-0734: unknown command beginning "setpagesiz..." - rest of line ignored.
+SQL> set pagesize 100
+SQL> set linesize 100
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7788 SCOTT      ANALYST         7566 09-DEC-82       3000                    20
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500                    30
+      7876 ADAMS      CLERK           7788 12-JAN-83       1100                    20
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+
+14 rows selected.
+
+SQL> select * from customer;
+
+       CID FNAME     LNAME
+---------- --------- ---------
+         1 sabaz     Alam
+         2 sohail    Alam
+         3 Abdul     Kalam
+
+SQL> select * from payment;
+select * from payment
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> drop table customer purge;
+
+Table dropped.
+
+SQL> create table customer(
+  2  customer_id number(3),
+  3  first_name varchar2(10),
+  4  last_name varchar2(10),
+  5  address_id number(3)
+  6  );
+
+Table created.
+
+SQL> insert into customer values(1,'Mary','Smith',5);
+
+1 row created.
+
+SQL> insert into customer values(2,'Gopal','Das',5);
+
+1 row created.
+
+SQL> insert into customer values(3,'Ram','Das',7);
+
+1 row created.
+
+SQL> insert into customer values(4,'Sabaz','Alam',8);
+
+1 row created.
+
+SQL> insert into customer values(5,'Komal','Das',9);
+
+1 row created.
+
+SQL> create table payment(
+  2  customer_id number(3),
+  3  amount number(3),
+  4  mode varchar2(10),
+  5  payment_date date
+  6  );
+mode varchar2(10),
+*
+ERROR at line 4:
+ORA-00904: : invalid identifier
+
+
+SQL> create table payment(
+  2  customer_id number(3),
+  3  amount number(3),
+  4  mode varchar2(10),
+  5  payment_date date
+  6
+SQL> create table payment(
+  2  customer_id number(3),
+  3  amount number(3),
+  4  modes_py varchar2(10),
+  5  payment_date date
+  6  );
+
+Table created.
+
+SQL> insert into payment(1,60,'Cash',to_date('24/09/20','DD/MM/YY');
+insert into payment(1,60,'Cash',to_date('24/09/20','DD/MM/YY')
+                    *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword
+
+
+SQL> insert into payment values(1,60,'Cash',to_date('24/09/20','DD/MM/YY');
+insert into payment values(1,60,'Cash',to_date('24/09/20','DD/MM/YY')
+                                                                    *
+ERROR at line 1:
+ORA-00917: missing comma
+
+
+SQL> insert into payment values(1,60,'Cash',to_date('24/09/20','DD/MM/YY'));
+
+1 row created.
+
+SQL> insert into payment values(2,30,'Credit',to_date('27/04/20','DD/MM/YY'));
+
+1 row created.
+
+SQL> insert into payment values(3,90,'Credit',to_date('7/07/20','DD/MM/YY'));
+
+1 row created.
+
+SQL> insert into payment values(4,50,'Debit',to_date('12/02/20','DD/MM/YY'));
+
+1 row created.
+
+SQL> insert into payment values(5,40,'Mobile',to_date('11/20/20','DD/MM/YY'));
+insert into payment values(5,40,'Mobile',to_date('11/20/20','DD/MM/YY'))
+                                                 *
+ERROR at line 1:
+ORA-01843: not a valid month
+
+
+SQL> insert into payment values(5,40,'Mobile',to_date('20/11/20','DD/MM/YY'));
+
+1 row created.
+
+SQL> select * from payment;
+
+CUSTOMER_ID     AMOUNT MODES_PY   PAYMENT_D
+----------- ---------- ---------- ---------
+          1         60 Cash       24-SEP-20
+          2         30 Credit     27-APR-20
+          3         90 Credit     07-JUL-20
+          4         50 Debit      12-FEB-20
+          5         40 Mobile     20-NOV-20
+
+SQL> select * from customer;
+
+CUSTOMER_ID FIRST_NAME LAST_NAME  ADDRESS_ID
+----------- ---------- ---------- ----------
+          1 Mary       Smith               5
+          2 Gopal      Das                 5
+          3 Ram        Das                 7
+          4 Sabaz      Alam                8
+          5 Komal      Das                 9
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from customer c inner join payment p on c.customer_id=p.customer_id;
+
+CUSTOMER_ID FIRST_NAME LAST_NAME  ADDRESS_ID CUSTOMER_ID     AMOUNT MODES_PY   PAYMENT_D
+----------- ---------- ---------- ---------- ----------- ---------- ---------- ---------
+          1 Mary       Smith               5           1         60 Cash       24-SEP-20
+          2 Gopal      Das                 5           2         30 Credit     27-APR-20
+          3 Ram        Das                 7           3         90 Credit     07-JUL-20
+          4 Sabaz      Alam                8           4         50 Debit      12-FEB-20
+          5 Komal      Das                 9           5         40 Mobile     20-NOV-20
+
+SQL> insert into customer values(6,'DD','Alam',55);
+
+1 row created.
+
+SQL> select * from customer c inner join payment p on c.customer_id=p.customer_id;
+
+CUSTOMER_ID FIRST_NAME LAST_NAME  ADDRESS_ID CUSTOMER_ID     AMOUNT MODES_PY   PAYMENT_D
+----------- ---------- ---------- ---------- ----------- ---------- ---------- ---------
+          1 Mary       Smith               5           1         60 Cash       24-SEP-20
+          2 Gopal      Das                 5           2         30 Credit     27-APR-20
+          3 Ram        Das                 7           3         90 Credit     07-JUL-20
+          4 Sabaz      Alam                8           4         50 Debit      12-FEB-20
+          5 Komal      Das                 9           5         40 Mobile     20-NOV-20
+
+SQL> select * from customer c left join payment p on c.customer_id=p.customer_id;
+
+CUSTOMER_ID FIRST_NAME LAST_NAME  ADDRESS_ID CUSTOMER_ID     AMOUNT MODES_PY   PAYMENT_D
+----------- ---------- ---------- ---------- ----------- ---------- ---------- ---------
+          1 Mary       Smith               5           1         60 Cash       24-SEP-20
+          2 Gopal      Das                 5           2         30 Credit     27-APR-20
+          3 Ram        Das                 7           3         90 Credit     07-JUL-20
+          4 Sabaz      Alam                8           4         50 Debit      12-FEB-20
+          5 Komal      Das                 9           5         40 Mobile     20-NOV-20
+          6 DD         Alam               55
+
+6 rows selected.
+
+SQL> select * from customer c right join payment p on c.customer_id=p.customer_id;
+
+CUSTOMER_ID FIRST_NAME LAST_NAME  ADDRESS_ID CUSTOMER_ID     AMOUNT MODES_PY   PAYMENT_D
+----------- ---------- ---------- ---------- ----------- ---------- ---------- ---------
+          1 Mary       Smith               5           1         60 Cash       24-SEP-20
+          2 Gopal      Das                 5           2         30 Credit     27-APR-20
+          3 Ram        Das                 7           3         90 Credit     07-JUL-20
+          4 Sabaz      Alam                8           4         50 Debit      12-FEB-20
+          5 Komal      Das                 9           5         40 Mobile     20-NOV-20
+
+SQL> insert into payment values(9,55,'Cash',to_date('15/01/03','DD/MM/YY'));
+
+1 row created.
+
+SQL> select * from payment;
+
+CUSTOMER_ID     AMOUNT MODES_PY   PAYMENT_D
+----------- ---------- ---------- ---------
+          1         60 Cash       24-SEP-20
+          2         30 Credit     27-APR-20
+          3         90 Credit     07-JUL-20
+          4         50 Debit      12-FEB-20
+          5         40 Mobile     20-NOV-20
+          9         55 Cash       15-JAN-03
+
+6 rows selected.
+
+SQL> select * from customer c right join payment p on c.customer_id=p.customer_id;
+
+CUSTOMER_ID FIRST_NAME LAST_NAME  ADDRESS_ID CUSTOMER_ID     AMOUNT MODES_PY   PAYMENT_D
+----------- ---------- ---------- ---------- ----------- ---------- ---------- ---------
+          1 Mary       Smith               5           1         60 Cash       24-SEP-20
+          2 Gopal      Das                 5           2         30 Credit     27-APR-20
+          3 Ram        Das                 7           3         90 Credit     07-JUL-20
+          4 Sabaz      Alam                8           4         50 Debit      12-FEB-20
+          5 Komal      Das                 9           5         40 Mobile     20-NOV-20
+                                                       9         55 Cash       15-JAN-03
+
+6 rows selected.
+
+SQL> select * from customer c full join payment p on c.customer_id=p.customer_id;
+
+CUSTOMER_ID FIRST_NAME LAST_NAME  ADDRESS_ID CUSTOMER_ID     AMOUNT MODES_PY   PAYMENT_D
+----------- ---------- ---------- ---------- ----------- ---------- ---------- ---------
+          1 Mary       Smith               5           1         60 Cash       24-SEP-20
+          2 Gopal      Das                 5           2         30 Credit     27-APR-20
+          3 Ram        Das                 7           3         90 Credit     07-JUL-20
+          4 Sabaz      Alam                8           4         50 Debit      12-FEB-20
+          5 Komal      Das                 9           5         40 Mobile     20-NOV-20
+                                                       9         55 Cash       15-JAN-03
+          6 DD         Alam               55
+
+7 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from customwe1;
+select * from customwe1
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select * from customer1;
+
+       CID CNAME                CITY
+---------- -------------------- --------------------
+         1 A                    Assam
+         2 B                    Bihar
+         5 C                    Sabaz
+
+SQL> drop table customer1 purge;
+
+Table dropped.
+
+SQL> create table products1(
+  2  product_id number(3),
+  3  product_name varchar2(10)
+  4  );
+
+Table created.
+
+SQL> insert into products1 values(1,'Laptop');
+
+1 row created.
+
+SQL> insert into products1 values(2,'Mobile');
+
+1 row created.
+
+SQL> create table customer1(
+  2  customer_id number(3),
+  3  customer_name varchar2(10)
+  4  );
+
+Table created.
+
+SQL> insert into customer1 values(101,'Alice');
+
+1 row created.
+
+SQL> insert into customer1 values(102,'Bob');
+
+1 row created.
+
+SQL> select product1.product_name,customer_name from product1 cross customer1;
+select product1.product_name,customer_name from product1 cross customer1
+                                                               *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select product1.product_name,customer1.customer_name from product1 cross customer1;
+select product1.product_name,customer1.customer_name from product1 cross customer1
+                                                                         *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select product1.product_name,customer1.customer_name from product1 cross join customer1;
+select product1.product_name,customer1.customer_name from product1 cross join customer1
+                                                          *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select products1.product_name,customer1.customer_name from products1 cross join customer1;
+
+PRODUCT_NA CUSTOMER_N
+---------- ----------
+Laptop     Alice
+Laptop     Bob
+Mobile     Alice
+Mobile     Bob
+
+SQL> select * from family;
+select * from family
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> commit;
+
+Commit complete.
+
+SQL>
