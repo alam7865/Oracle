@@ -1,0 +1,201 @@
+
+SQL*Plus: Release 19.0.0.0.0 - Production on Wed Mar 26 11:42:17 2025
+Version 19.3.0.0.0
+
+Copyright (c) 1982, 2019, Oracle.  All rights reserved.
+
+Enter user-name: c##batch7am
+Enter password:
+Last Successful login time: Sat Mar 15 2025 12:43:20 +05:30
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.3.0.0.0
+
+SQL> select * from tt1;
+
+no rows selected
+
+SQL> drop table tt1 purge;
+
+Table dropped.
+
+SQL> create table tt1(
+  2  sno number(4),
+  3  sname varchar2(12),
+  4  rollNo number(3) default=121
+  5  );
+rollNo number(3) default=121
+                        *
+ERROR at line 4:
+ORA-00936: missing expression
+
+
+SQL> create table tt1(
+  2  sno number(4),
+  3  sname varchar2(12),
+  4  rollNo number(3) default(121)
+  5  );
+
+Table created.
+
+SQL> insert into tt1 values(1,'sabaz',106);
+
+1 row created.
+
+SQL> insert into tt1(sno,sname) values(2,'Kamal');
+
+1 row created.
+
+SQL> select * from tt1;
+
+       SNO SNAME            ROLLNO
+---------- ------------ ----------
+         1 sabaz               106
+         2 Kamal               121
+
+SQL> alter table tt1 add constraint co1 primarykey (sno);
+alter table tt1 add constraint co1 primarykey (sno)
+                                              *
+ERROR at line 1:
+ORA-00902: invalid datatype
+
+
+SQL> alter table tt1 add constraint co1 primary key (sno);
+
+Table altered.
+
+SQL> alter table tt1 add constraint con2 unique (sname);
+
+Table altered.
+
+SQL> insert into tt1(sno,sname) values(2,'Mohan);
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> insert into tt1(sno,sname) values(2,'Mohan');
+insert into tt1(sno,sname) values(2,'Mohan')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (C##BATCH7AM.CO1) violated
+
+
+SQL> alter table tt1 disable constraint con1;
+alter table tt1 disable constraint con1
+*
+ERROR at line 1:
+ORA-02431: cannot disable constraint (CON1) - no such constraint
+
+
+SQL> alter table tt1 disable constraint co1;
+
+Table altered.
+
+SQL> alter table tt1 enable constraint co1;
+
+Table altered.
+
+SQL> alter table tt1 drop constraint co1;
+
+Table altered.
+
+SQL> select * from tab2;
+
+       SNO SNAME           CLASS
+---------- ---------- ----------
+         1 sabaz              11
+         2 Gopal               4
+         3 Sony                5
+
+SQL> select * from mar;
+select * from mar
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> create table mar(
+  2  sno number(3),
+  3  m1 number(3),
+  4  m2 number(3),
+  5  m3 number(3)
+  6  );
+
+Table created.
+
+SQL> insert into values(19,30,60);
+insert into values(19,30,60)
+            *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> insert into mar values(19,30,60);
+insert into mar values(19,30,60)
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+
+
+SQL> insert into mar values(1,19,30,60);
+
+1 row created.
+
+SQL> insert into mar values(2,20,40,70);
+
+1 row created.
+
+SQL> insert into mar values(3,30,50,80);
+
+1 row created.
+
+SQL> select * from mar;
+
+       SNO         M1         M2         M3
+---------- ---------- ---------- ----------
+         1         19         30         60
+         2         20         40         70
+         3         30         50         80
+
+SQL> select sno,m1,m2,m3 as total from mar;
+
+       SNO         M1         M2      TOTAL
+---------- ---------- ---------- ----------
+         1         19         30         60
+         2         20         40         70
+         3         30         50         80
+
+SQL> select sno,m1,m2,m3,m1+m2+m3 as total from mar;
+
+       SNO         M1         M2         M3      TOTAL
+---------- ---------- ---------- ---------- ----------
+         1         19         30         60        109
+         2         20         40         70        130
+         3         30         50         80        160
+
+SQL>  set pagesize 100;
+SQL> set pageheight 100
+SP2-0158: unknown SET option "pageheight"
+SQL> set pagesize 100
+SQL> set linesize 100
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7788 SCOTT      ANALYST         7566 09-DEC-82       3000                    20
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500                    30
+      7876 ADAMS      CLERK           7788 12-JAN-83       1100                    20
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+
+14 rows selected.
