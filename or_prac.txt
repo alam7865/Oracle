@@ -1,0 +1,172 @@
+
+SQL*Plus: Release 19.0.0.0.0 - Production on Wed Apr 9 18:54:49 2025
+Version 19.3.0.0.0
+
+Copyright (c) 1982, 2019, Oracle.  All rights reserved.
+
+Enter user-name: c##batch7am
+Enter password:
+Last Successful login time: Wed Apr 09 2025 11:18:07 +05:30
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.3.0.0.0
+
+SQL> select * from payment;
+
+CUSTOMER_ID     AMOUNT MODES_PY   PAYMENT_D
+----------- ---------- ---------- ---------
+          1         60 Cash       24-SEP-20
+          2         30 Credit     27-APR-20
+          3         90 Credit     07-JUL-20
+          4         50 Debit      12-FEB-20
+          5         40 Mobile     20-NOV-20
+          9         55 Cash       15-JAN-03
+
+6 rows selected.
+
+SQL> select modes_py,count(modes_py) as total from payment group by modes_py;
+
+MODES_PY        TOTAL
+---------- ----------
+Debit               1
+Cash                2
+Mobile              1
+Credit              2
+
+SQL> select modes_py,count(modes_py) as total from payment group by modes_py order by total desc;
+
+MODES_PY        TOTAL
+---------- ----------
+Cash                2
+Credit              2
+Mobile              1
+Debit               1
+
+SQL> select modes_py,count(modes_py) as total from payment group by modes_py order by total asc;
+
+MODES_PY        TOTAL
+---------- ----------
+Mobile              1
+Debit               1
+Credit              2
+Cash                2
+
+SQL> select modes_py,count(modes_py) as total from payment group by modes_py total>1;
+select modes_py,count(modes_py) as total from payment group by modes_py total>1
+                                                                        *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select modes_py,count(modes_py) as total from payment group by modes_py having total>1;
+select modes_py,count(modes_py) as total from payment group by modes_py having total>1
+                                                                               *
+ERROR at line 1:
+ORA-00904: "TOTAL": invalid identifier
+
+
+SQL> select modes_py,count(modes_py) as total from payment group by modes_py having modes_py>1;
+select modes_py,count(modes_py) as total from payment group by modes_py having modes_py>1
+                                                                               *
+ERROR at line 1:
+ORA-01722: invalid number
+
+
+SQL> select modes_py,count(modes_py) as total from payment group by modes_py having modes_py >1;
+select modes_py,count(modes_py) as total from payment group by modes_py having modes_py >1
+                                                                               *
+ERROR at line 1:
+ORA-01722: invalid number
+
+
+SQL> select modes_py,count(modes_py) as total from payment group by modes_py having total >1;
+select modes_py,count(modes_py) as total from payment group by modes_py having total >1
+                                                                               *
+ERROR at line 1:
+ORA-00904: "TOTAL": invalid identifier
+
+
+SQL> select modes_py,count(modes_py) as total from payment group by modes_py having count(total) >1;
+select modes_py,count(modes_py) as total from payment group by modes_py having count(total) >1
+                                                                                     *
+ERROR at line 1:
+ORA-00904: "TOTAL": invalid identifier
+
+
+SQL> select modes_py,count(modes_py) as total from payment group by modes_py having count(modes_py) >1;
+
+MODES_PY        TOTAL
+---------- ----------
+Cash                2
+Credit              2
+
+SQL> select modes_py,count(modes_py) as total from payment group by modes_py having count(modes_py) >1 order by total asc;
+
+MODES_PY        TOTAL
+---------- ----------
+Credit              2
+Cash                2
+
+SQL> select * from payment;
+
+CUSTOMER_ID     AMOUNT MODES_PY   PAYMENT_D
+----------- ---------- ---------- ---------
+          1         60 Cash       24-SEP-20
+          2         30 Credit     27-APR-20
+          3         90 Credit     07-JUL-20
+          4         50 Debit      12-FEB-20
+          5         40 Mobile     20-NOV-20
+          9         55 Cash       15-JAN-03
+
+6 rows selected.
+
+SQL> select modes_py,count(modes_py) as total from payment group by modes_py;
+
+MODES_PY        TOTAL
+---------- ----------
+Debit               1
+Cash                2
+Mobile              1
+Credit              2
+
+SQL> select modes_py,count(modes_py) as total from payment group by modes_py order by total asc;
+
+MODES_PY        TOTAL
+---------- ----------
+Mobile              1
+Debit               1
+Credit              2
+Cash                2
+
+SQL> select modes_py,count(modes_py) as total from payment group by modes_py having count(modes_py) >1;
+
+MODES_PY        TOTAL
+---------- ----------
+Cash                2
+Credit              2
+
+SQL> select modes_py,count(modes_py) as total from payment group by modes_py having count(modes_py) >1 order by total asc;
+
+MODES_PY        TOTAL
+---------- ----------
+Credit              2
+Cash                2
+
+SQL> select modes_py,count(modes_py) as total from payment group by modes_py having count(modes_py) >1 order by total desc;
+
+MODES_PY        TOTAL
+---------- ----------
+Credit              2
+Cash                2
+
+SQL> select modes_py,avg(amount) as avg from payment group by modes_py;
+
+MODES_PY          AVG
+---------- ----------
+Debit              50
+Cash             57.5
+Mobile             40
+Credit             60
+
+SQL>
