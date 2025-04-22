@@ -1,0 +1,608 @@
+
+SQL*Plus: Release 19.0.0.0.0 - Production on Mon Apr 21 09:42:21 2025
+Version 19.3.0.0.0
+
+Copyright (c) 1982, 2019, Oracle.  All rights reserved.
+
+Enter user-name: c##batch7am
+Enter password:
+Last Successful login time: Wed Apr 09 2025 18:56:18 +05:30
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.3.0.0.0
+
+SQL> select * from tab;
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+AADHAR
+TABLE
+
+ADDHAR
+TABLE
+
+CID
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+COL1
+TABLE
+
+COURSE12
+TABLE
+
+COURSETO
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+CUSTO1
+TABLE
+
+CUSTO2
+TABLE
+
+CUSTOMER
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+CUSTOMER1
+TABLE
+
+CUSTOMER2
+TABLE
+
+DAT
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+DEPARTMENT1
+TABLE
+
+DT1
+TABLE
+
+ELEMENTS
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+ELEMS
+TABLE
+
+EMAIL
+TABLE
+
+EMP
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+EMP1
+TABLE
+
+EMP12
+TABLE
+
+EMP2
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+EMPDEMO
+TABLE
+
+EMPID
+TABLE
+
+EMPLOY
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+EMPLOYE1
+TABLE
+
+EMPLOYEE
+TABLE
+
+EMPLOYEES
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+EMP_CLERK
+TABLE
+
+EMP_CLERK1
+TABLE
+
+EMP_MANAGER
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+EMP_MANAGER1
+TABLE
+
+EMP_MGR
+TABLE
+
+EMP_OTHER
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+EMP_OTHER1
+TABLE
+
+EMP_SALESMAN
+TABLE
+
+FAMILY
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+JOB
+TABLE
+
+JOBES
+TABLE
+
+JOBS
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+KK1
+TABLE
+
+MAIL
+TABLE
+
+MAR
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+MARKS
+TABLE
+
+MDATA
+TABLE
+
+PAYMENT
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+PAYMENTS
+TABLE
+
+PLAYER
+TABLE
+
+PRODUCTS
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+PRODUCTS1
+TABLE
+
+REPORTCARD
+TABLE
+
+SAB
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+SAB1
+TABLE
+
+SABAZ
+TABLE
+
+SABAZ12
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+SABAZS
+TABLE
+
+SABBAJ
+TABLE
+
+SAHNAWAZ
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+SS1
+TABLE
+
+SS3
+TABLE
+
+SS4
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+SSD
+TABLE
+
+SSS
+TABLE
+
+ST1
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+ST2
+TABLE
+
+STD
+TABLE
+
+STD1
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+STD2
+TABLE
+
+STDTO
+TABLE
+
+STUD
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+STUDENT1
+TABLE
+
+STUDENT31
+TABLE
+
+STUDENTS
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+STUDENTS29
+TABLE
+
+STUDENTS4
+TABLE
+
+STUDENTSS
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+T1
+TABLE
+
+T2
+TABLE
+
+TAB1
+TABLE
+
+
+TNAME
+--------------------------------------------------------------------------------
+TABTYPE        CLUSTERID
+------------- ----------
+TAB2
+TABLE
+
+TABLET
+TABLE
+
+TT1
+TABLE
+
+
+81 rows selected.
+
+SQL> select * from sab;
+
+       SID SNAME      COURSE     HOME       HOBBYS
+---------- ---------- ---------- ---------- ------------
+         1 sabaz      B.Tech     Bihar      Cricket
+         1 sabaz      B.Tech     Bihar      Cricket
+         2 Mohan      Teacher    Bihar      Chess
+         3 kalam      B.Tech     Assam      Football
+         4 kobra      snake      NagaLand   fight
+         5 Gopal                            Tennis
+         6 KK                               Singing
+
+         7 sohail     School     Bijni      Cricket
+
+9 rows selected.
+
+SQL> select * from sabaz;
+
+     EMPID JOB
+---------- --------------------
+         1 enginner
+         2 doctor
+
+SQL> drop table sabaz purge;
+
+Table dropped.
+
+SQL> create table sabaz(
+  2  sno number(3),
+  3  name varchar2(10),
+  4  doj date
+  5  );
+
+Table created.
+
+SQL> insert into sabaz values(1,'sabaz','2/2/12');
+insert into sabaz values(1,'sabaz','2/2/12')
+                                   *
+ERROR at line 1:
+ORA-01843: not a valid month
+
+
+SQL> insert into sabaz values(1,'sabaz','12/2/2003');
+insert into sabaz values(1,'sabaz','12/2/2003')
+                                   *
+ERROR at line 1:
+ORA-01843: not a valid month
+
+
+SQL> insert into sabaz values(1,'sabaz',to_date('12/2/2003','DD/MM/YYYY'));
+
+1 row created.
+
+SQL> insert into sabaz values(2,'Gopal',to_date('4/4/2004','DD/MM/YYYY'));
+
+1 row created.
+
+SQL> insert into sabaz values(3,'Ramu',to_date('5/5/2005','DD/MM/YYYY'));
+
+1 row created.
+
+SQL> select * from sabaz;
+
+       SNO NAME       DOJ
+---------- ---------- ---------
+         1 sabaz      12-FEB-03
+         2 Gopal      04-APR-04
+         3 Ramu       05-MAY-05
+
+SQL> select * from sabaz1;
+select * from sabaz1
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> create table sabaz1(
+  2  sno number(3) not null,
+  3  marks number(3) (check marks>0 && marks<=100)
+  4  );
+Enter value for marks: 12
+old   3: marks number(3) (check marks>0 && marks<=100)
+new   3: marks number(3) (check marks>0 12<=100)
+marks number(3) (check marks>0 12<=100)
+                *
+ERROR at line 3:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table sabaz1(
+  2  sno number(3) not null,
+  3  marks number(3) check(marks>=0 && marks<=50)
+  4  );
+old   3: marks number(3) check(marks>=0 && marks<=50)
+new   3: marks number(3) check(marks>=0 12<=50)
+marks number(3) check(marks>=0 12<=50)
+                               *
+ERROR at line 3:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table sabaz2(
+  2  sno number(3) not null,
+  3  marks number(3) (check marks>0 && marks<100)
+  4  );
+old   3: marks number(3) (check marks>0 && marks<100)
+new   3: marks number(3) (check marks>0 12<100)
+marks number(3) (check marks>0 12<100)
+                *
+ERROR at line 3:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table sabaz2(
+  2  sno number(3) not null,
+  3  marks number(3) check (marks>0 && marks<100)
+  4  );
+old   3: marks number(3) check (marks>0 && marks<100)
+new   3: marks number(3) check (marks>0 12<100)
+marks number(3) check (marks>0 12<100)
+                               *
+ERROR at line 3:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table sabaz2(
+  2  sno number(3) not null,
+  3  marks number(3) check (marks>0 and marks<100)
+  4  );
+
+Table created.
+
+SQL> insert into sabaz2(2,12);
+insert into sabaz2(2,12)
+                   *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword
+
+
+SQL> insert into sabaz2 values(2,12);
+
+1 row created.
+
+SQL> insert into sabaz2 values(3,13);
+
+1 row created.
+
+SQL> select * from sabaz2;
+
+       SNO      MARKS
+---------- ----------
+         2         12
+         3         13
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from sabaz1;
+select * from sabaz1
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select * from sabaz;
+
+       SNO NAME       DOJ
+---------- ---------- ---------
+         1 sabaz      12-FEB-03
+         2 Gopal      04-APR-04
+         3 Ramu       05-MAY-05
+
+SQL> alter table sabaz2 drop column marks;
+
+Table altered.
+
+SQL> select * from sabaz2;
+
+       SNO
+----------
+         2
+         3
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from sabaz;
+
+       SNO NAME       DOJ
+---------- ---------- ---------
+         1 sabaz      12-FEB-03
+         2 Gopal      04-APR-04
+         3 Ramu       05-MAY-05
+
+SQL> select * from sabaz2;
+
+       SNO
+----------
+         2
+         3
+
+SQL> truncate table sabaz2;
+
+Table truncated.
+
+SQL> select * from sabaz2;
+
+no rows selected
+
+SQL> ^A
